@@ -2,43 +2,33 @@ import React from 'react';
 
 function App() {
   const value = 'World';
-  let parentMessage = { message: 'default' };
-  let origin = "";
-  let data = "";
-  let hadListener = false;
-  let neededToAttach = false;
+  const [parentMessage, setParentMessage] = React.useState({ message: 'default' });
+  const [origin, setOrigin] = React.useState();
 
   const processEvent = (event) => {
-    console.log("processing event");
-
-    data = JSON.stringify(event.data);
-    origin = event.origin;
-
-    if(event.origin === 'https://localhost:44333' || event.origin === 'https://dart.datascan.com') {
-      parentMessage = event.data.message;
+    if(event.origin === 'https://localhost:44333') {
+      setParentMessage({...event.data});
+      setOrigin(event.origin);
     }
   }
 
   if(window.addEventListener) {
-    hadListener = true;
-    console.log("had listener");
-    window.addEventListener('message', processEvent, false);
+    window.addEventListener('message', processEvent);
   }
   else {
-    neededToAttach = true;
-    console.log("needed to attach");
     window.attachEvent("onmessage", processEvent);
   }
 
+  const openAlert = () => {
+    alert('alerting...');
+  };
 
   return (
     <div>
       <h1>Hello {value}</h1>
       <div>Message from parent: { parentMessage.message }</div>
       <div>origin: {origin}</div>
-      <div>event data: {data}</div>
-      <div>had listener: {hadListener.toString()}</div>
-      <div>needed to attach: {neededToAttach.toString()}</div>
+      <button onClick={openAlert}>Whats up</button>
     </div>
   );
 }
