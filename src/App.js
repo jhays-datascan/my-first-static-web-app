@@ -5,7 +5,7 @@ function App() {
   let parentMessage = { message: 'default' };
 
   window.addEventListener('message', (event) => {
-    if(event.origin === 'https://localhost:44333/Shortcut/Admin' || event.origin === 'https://dart.datascan.com/Shortcut/Admin') {
+    if(event.origin === 'https://localhost:44333' || event.origin === 'https://dart.datascan.com') {
       parentMessage = event.data;
     }
   });
