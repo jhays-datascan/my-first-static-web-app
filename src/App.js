@@ -7,7 +7,7 @@ function App() {
   var data = "";
 
   window.addEventListener('message', (event) => {
-    data = event.date;
+    data = event.data;
     origin = event.origin;
 
     if(event.origin === 'https://localhost:44333' || event.origin === 'https://dart.datascan.com') {
@@ -20,7 +20,7 @@ function App() {
       <h1>Hello {value}</h1>
       <div>Message from parent: { parentMessage.message }</div>
       <div>origin: {origin}</div>
-      <div>event data: {evt.data}</div>
+      <div>event data: {data}</div>
     </div>
   );
 }
