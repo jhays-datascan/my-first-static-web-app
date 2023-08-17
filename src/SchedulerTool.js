@@ -21,7 +21,7 @@ const SchedulerTool = () => {
   const [origin, setOrigin] = React.useState();
 
   const processEvent = (event) => {
-    if(event.origin === 'https://localhost:44333') {
+    if(event.origin === 'https://localhost:44333' || event.origin === 'https://dart.datascan.com') {
       setParentMessage({...event.data});
       setOrigin(event.origin);
     }
