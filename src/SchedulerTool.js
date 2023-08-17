@@ -24,6 +24,7 @@ const SchedulerTool = () => {
     if(event.origin === 'https://localhost:44333' || event.origin === 'https://dart.datascan.com') {
       setParentMessage({...event.data});
       setOrigin(event.origin);
+      console.log(event);
     }
   }
 
@@ -36,6 +37,11 @@ const SchedulerTool = () => {
 
   const openAlert = () => {
     alert('alerting...');
+  };
+
+  const sendMessageToParent = () => {
+    const message = "What in tarnation?";
+    window.parent.postMessage(message, 'https://dart.datascan.com');
   };
 
   const data = 
@@ -81,7 +87,7 @@ const SchedulerTool = () => {
         minorSlotTemplate: null
       };
 
-    const [currentView] = React.useState("Week");
+    const [currentView] = React.useState("Week");    
 
   return (
     <div>
@@ -89,6 +95,7 @@ const SchedulerTool = () => {
       <div>Message from parent: { parentMessage.message }</div>
       <div>origin: {origin}</div>
       <button onClick={openAlert}>Whats up</button>
+      <button onClick={sendMessageToParent}>Send message to parent</button>
       <NavLink tag={Link} className="text-dark" to="/about">About</NavLink>
       <ScheduleComponent
                 width='100%'
